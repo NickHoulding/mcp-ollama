@@ -1,16 +1,15 @@
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP("math_mcp")
+mcp = FastMCP("test_mcp")
 
 @mcp.tool()
 async def add(a: float, b: float) -> float:
     """
-    Adds two integers together
+    Adds two numbers together.
 
     Args:
-        a (float): The first number
-        b (float): The second number
-    
+        a (float): The first number.
+        b (float): The second number.
     Returns:
         The sum of a and b.
     """

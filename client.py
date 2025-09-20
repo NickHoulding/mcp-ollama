@@ -9,7 +9,7 @@ class MCPClient():
     def __init__(self) -> None:
         self.session: ClientSession
         self.exit_stack = AsyncExitStack()
-        self.model = 'llama3.2:3b'
+        self.model = "llama3.2:3b"
 
     async def connect_to_server(self, server_script_path: str) -> None:
         """
