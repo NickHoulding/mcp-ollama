@@ -1,15 +1,9 @@
 [project]
-name = "mcp-ollama"
+name = "web-search"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "mcp[sse]>=1.14.1",
-    "ollama>=0.5.4",
-]
-
-[tool.uv.workspace]
-members = [
-    "servers/web-search",
+    "requests>=2.32.5",
 ]

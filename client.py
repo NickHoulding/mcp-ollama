@@ -1,8 +1,10 @@
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from contextlib import AsyncExitStack
+from mcp.types import TextContent
 import asyncio
 import ollama
+import json
 import sys
 
 class MCPClient():
@@ -87,11 +89,13 @@ class MCPClient():
                 
                 result = await self.session.call_tool(tool_name, tool_args)
                 result_content = ""
+                
                 if result.content:
-                    result_content = " ".join([
-                        getattr(item, 'text', str(item))
-                        for item in result.content
-                    ])
+                    for item in result.content:
+                        if isinstance(item, TextContent):
+                            text = json.loads(item.text)
+                            result_content += "\n".join([text["title"], text["url"], text["description"]])
+                    result_content = result_content.strip()
                 
                 tool_results.append({
                     "role": "tool",
@@ -102,7 +106,7 @@ class MCPClient():
             messages.extend(tool_results)
             messages.append({
                 "role": "user",
-                "content": "Please provide a clear, natural language answer based on the tool result."
+                "content": f"Please provide a clear, natural language answer based on these tool results: {[x['content'] for x in tool_results]}"
             })
             
             follow_up_response = ollama.chat(
