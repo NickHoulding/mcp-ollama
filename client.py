@@ -93,10 +93,14 @@ class MCPClient():
                 if result.content:
                     for item in result.content:
                         if isinstance(item, TextContent):
-                            text = json.loads(item.text)
-                            result_content += "\n".join([text["title"], text["url"], text["description"]])
+                            try:
+                                text = json.loads(item.text)
+                                result_content += text["content"]
+                            except json.JSONDecodeError as e:
+                                print(f"JSON decode error: {e}")
+                                result_content += item.text
                     result_content = result_content.strip()
-                
+
                 tool_results.append({
                     "role": "tool",
                     "content": result_content,
