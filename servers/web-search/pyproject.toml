@@ -5,12 +5,16 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "aiohttp>=3.12.15",
     "beautifulsoup4>=4.13.5",
+    "fastmcp>=2.12.3",
     "html5lib>=1.1",
     "langchain>=0.3.27",
     "langchain-text-splitters>=0.3.11",
+    "logging>=0.4.9.6",
     "lxml>=6.0.1",
     "numpy>=2.3.3",
     "ollama>=0.5.4",
+    "python-dotenv>=1.1.1",
     "requests>=2.32.5",
 ]

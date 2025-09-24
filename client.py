@@ -45,6 +45,9 @@ class MCPClient():
 
     async def process_query(self, query: str) -> str:
         """Process a query using Ollama model and available tools"""
+        if not query.strip():
+            return "Error: Query must not be empty."
+
         messages = [
             {
                 "role": "user",
@@ -140,7 +143,7 @@ class MCPClient():
                     break
             
                 response = await self.process_query(query)
-                print(response)
+                print("\n" + response)
 
             except Exception as e:
                 print(f"\nError: {str(e)}")
